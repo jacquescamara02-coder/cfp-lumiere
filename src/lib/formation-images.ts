@@ -1,5 +1,6 @@
 import business from "@/assets/training-business.jpg";
-import tech from "@/assets/training-tech.jpg";
+import techAsset from "@/assets/training-tech-new.jpg.asset.json";
+const tech = techAsset.url;
 import journalism from "@/assets/training-journalism.jpg";
 import edcp from "@/assets/training-edcp.jpg";
 import stats from "@/assets/training-stats.jpg";
