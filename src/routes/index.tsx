@@ -7,8 +7,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { FORMATIONS, TESTIMONIALS, FAQ } from "@/lib/formations";
 import { SITE, whatsappUrl } from "@/lib/site";
-import hero from "@/assets/hero-classroom.jpg";
+import heroAsset from "@/assets/hero-classroom-real.jpg.asset.json";
 import logo from "@/assets/cfp-logo.png";
+const hero = heroAsset.url;
 
 export const Route = createFileRoute("/")({
   head: () => ({
