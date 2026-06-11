@@ -33,7 +33,8 @@ function FormationsPage() {
     <SiteLayout>
       <section className="bg-gradient-hero text-white">
         <div className="mx-auto max-w-7xl px-4 py-20 md:px-8">
-          <div className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Notre catalogue</div>
+          <BackHomeButton />
+          <div className="mt-5 text-xs font-semibold uppercase tracking-[0.2em] text-accent">Notre catalogue</div>
           <h1 className="mt-3 max-w-3xl text-4xl font-extrabold leading-tight md:text-6xl">
             12 domaines pour bâtir des <span className="text-accent">carrières solides</span>
           </h1>
