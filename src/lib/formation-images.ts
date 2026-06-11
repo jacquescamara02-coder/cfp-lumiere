@@ -13,7 +13,8 @@ const agri = agriAsset.url;
 import leadershipAsset from "@/assets/training-leadership-new.jpg.asset.json";
 const leadership = leadershipAsset.url;
 import compta from "@/assets/training-compta.jpg";
-import methodes from "@/assets/training-methodes.jpg";
+import methodesAsset from "@/assets/training-methodes-new.jpg.asset.json";
+const methodes = methodesAsset.url;
 import langues from "@/assets/training-langues.jpg";
 import appro from "@/assets/training-appro.jpg";
 
