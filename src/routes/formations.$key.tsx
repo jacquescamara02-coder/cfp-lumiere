@@ -86,7 +86,7 @@ function FormationDetail() {
               formation dans nos locaux à Lubumbashi ou directement en entreprise.
             </p>
             <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-              {formation.topics.map((t) => (
+              {formation.topics.map((t: string) => (
                 <li key={t} className="flex items-start gap-3 rounded-xl border border-border/60 bg-card p-4 shadow-card">
                   <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
                   <span className="text-sm font-medium text-foreground/90">{t}</span>
@@ -117,7 +117,7 @@ function FormationDetail() {
               <CardContent className="p-5">
                 <div className="text-xs uppercase tracking-wider text-muted-foreground">Centre</div>
                 <div className="mt-1 font-bold text-brand-blue-deep">CFP Lumière — Lubumbashi</div>
-                <p className="mt-2 text-sm text-muted-foreground">{SITE.addressShort}</p>
+                <p className="mt-2 text-sm text-muted-foreground">{SITE.address}</p>
                 <p className="mt-1 text-sm text-muted-foreground">{SITE.phoneDisplay}</p>
               </CardContent>
             </Card>
