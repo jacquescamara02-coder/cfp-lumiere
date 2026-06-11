@@ -4,6 +4,7 @@ import { SiteLayout } from "@/components/SiteLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FORMATIONS } from "@/lib/formations";
+import { FORMATION_IMAGES } from "@/lib/formation-images";
 import { whatsappUrl } from "@/lib/site";
 import business from "@/assets/training-business.jpg";
 import tech from "@/assets/training-tech.jpg";
@@ -66,23 +67,46 @@ function FormationsPage() {
           <h2 className="text-2xl font-bold text-brand-blue-deep">Tous nos domaines</h2>
           <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {FORMATIONS.map((f) => (
-              <Card key={f.key} className="border-border/60 shadow-card transition-all hover:-translate-y-1 hover:shadow-elegant">
-                <CardContent className="p-6">
-                  <div className="grid h-12 w-12 place-items-center rounded-xl bg-gradient-brand text-white">
-                    <f.icon className="h-6 w-6" />
+              <Link
+                key={f.key}
+                to="/formations/$key"
+                params={{ key: f.key }}
+                className="group block focus:outline-none"
+              >
+                <Card className="h-full overflow-hidden border-border/60 shadow-card transition-all hover:-translate-y-1 hover:shadow-elegant focus-visible:ring-2 focus-visible:ring-accent">
+                  <div className="relative h-44 overflow-hidden">
+                    <img
+                      src={FORMATION_IMAGES[f.key]}
+                      alt={f.title}
+                      loading="lazy"
+                      width={1024}
+                      height={1024}
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-brand-blue-deep/85 via-brand-blue-deep/20 to-transparent" />
+                    <div className="absolute left-4 top-4 grid h-11 w-11 place-items-center rounded-xl bg-white/95 text-brand-blue-deep shadow-md">
+                      <f.icon className="h-5 w-5" />
+                    </div>
+                    <h3 className="absolute bottom-3 left-4 right-4 text-lg font-bold text-white drop-shadow">
+                      {f.title}
+                    </h3>
                   </div>
-                  <h3 className="mt-4 text-lg font-bold text-brand-blue-deep">{f.title}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">{f.description}</p>
-                  <ul className="mt-4 space-y-1.5">
-                    {f.topics.map((t) => (
-                      <li key={t} className="flex items-start gap-2 text-sm text-foreground/80">
-                        <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
-                        {t}
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
+                  <CardContent className="p-5">
+                    <p className="text-sm text-muted-foreground">{f.description}</p>
+                    <ul className="mt-4 space-y-1.5">
+                      {f.topics.map((t) => (
+                        <li key={t} className="flex items-start gap-2 text-sm text-foreground/80">
+                          <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                          {t}
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="mt-5 inline-flex items-center text-sm font-semibold text-accent transition-transform group-hover:translate-x-1">
+                      Découvrir <ArrowRight className="ml-1 h-4 w-4" />
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
           </div>
         </div>
