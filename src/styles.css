@@ -116,3 +116,27 @@
 @utility animate-marquee {
   animation: marquee 38s linear infinite;
 }
+
+@keyframes hero-rise {
+  0% { opacity: 0; transform: translateY(28px) scale(0.98); filter: blur(6px); }
+  100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+@utility animate-hero-rise {
+  animation: hero-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes hero-glow {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.12); }
+}
+@utility animate-hero-glow {
+  animation: hero-glow 5s ease-in-out infinite;
+}
+
+@keyframes hero-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@utility animate-hero-float {
+  animation: hero-float 5.5s ease-in-out infinite;
+}

@@ -72,36 +72,38 @@ function Hero() {
       <div className="absolute inset-0" style={{ backgroundImage: `url(${hero})`, backgroundSize: "cover", backgroundPosition: "center" }} />
       <div className="absolute inset-0 bg-gradient-hero opacity-85" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(255,255,255,0.12),_transparent_60%)]" />
+      <div className="pointer-events-none absolute -left-32 top-10 h-80 w-80 rounded-full bg-accent/40 blur-3xl animate-hero-glow" />
+      <div className="pointer-events-none absolute -right-20 bottom-0 h-96 w-96 rounded-full bg-brand-blue/40 blur-3xl animate-hero-glow" style={{ animationDelay: "1.5s" }} />
       <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-20 md:grid-cols-[1.2fr_1fr] md:px-8 md:py-28">
         <div className="text-white">
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-xs font-medium backdrop-blur">
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-xs font-medium backdrop-blur animate-hero-rise" style={{ animationDelay: "0ms" }}>
             <Sparkles className="h-3.5 w-3.5 text-accent" />
             Certifié par le Ministère de la Formation et des Métiers
           </div>
-          <h1 className="mt-6 text-4xl font-extrabold leading-tight md:text-6xl">
+          <h1 className="mt-6 text-4xl font-extrabold leading-tight md:text-6xl animate-hero-rise" style={{ animationDelay: "120ms" }}>
             Développez vos <span className="text-accent">compétences</span><br />
             forgez votre <span className="underline decoration-accent decoration-4 underline-offset-4">avenir</span>.
           </h1>
-          <p className="mt-6 max-w-xl text-lg text-white/85">
+          <p className="mt-6 max-w-xl text-lg text-white/85 animate-hero-rise" style={{ animationDelay: "260ms" }}>
             CFP Lumière, l'<strong>Espace de Développement des Compétences Professionnelles</strong> de Lubumbashi.
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Button asChild size="lg" className="bg-accent text-white shadow-elegant hover:bg-[var(--brand-red-deep)]">
+          <div className="mt-8 flex flex-wrap gap-3 animate-hero-rise" style={{ animationDelay: "400ms" }}>
+            <Button asChild size="lg" className="bg-accent text-white shadow-elegant transition-transform hover:-translate-y-0.5 hover:bg-[var(--brand-red-deep)]">
               <Link to="/formations">Voir nos formations <ArrowRight className="ml-1 h-4 w-4" /></Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="border-white/40 bg-white/10 text-white backdrop-blur hover:bg-white hover:text-brand-blue-deep">
+            <Button asChild size="lg" variant="outline" className="border-white/40 bg-white/10 text-white backdrop-blur transition-transform hover:-translate-y-0.5 hover:bg-white hover:text-brand-blue-deep">
               <Link to="/contact">Nous contacter</Link>
             </Button>
           </div>
-          <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-white/80">
+          <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-white/80 animate-hero-rise" style={{ animationDelay: "540ms" }}>
             <span className="flex items-center gap-2"><MapPin className="h-4 w-4 text-accent" />Av. Lomami, Lubumbashi</span>
             <span className="flex items-center gap-2"><Phone className="h-4 w-4 text-accent" />{SITE.phoneDisplay}</span>
           </div>
         </div>
 
-        <div className="relative hidden md:block">
-          <div className="absolute -right-10 -top-10 h-72 w-72 rounded-full bg-accent/30 blur-3xl" />
-          <div className="relative rounded-3xl border border-white/20 bg-white/10 p-6 backdrop-blur-xl shadow-elegant">
+        <div className="relative hidden md:block animate-hero-rise" style={{ animationDelay: "300ms" }}>
+          <div className="absolute -right-10 -top-10 h-72 w-72 rounded-full bg-accent/30 blur-3xl animate-hero-glow" />
+          <div className="relative rounded-3xl border border-white/20 bg-white/10 p-6 backdrop-blur-xl shadow-elegant animate-hero-float">
             <img src={logo} alt="Logo CFP Lumière" className="mx-auto h-32 w-32 rounded-2xl bg-white p-3" />
             <div className="mt-5 text-center text-white">
               <div className="text-xs uppercase tracking-[0.2em] text-white/70">Espace de Développement</div>
@@ -130,21 +132,27 @@ function Hero() {
 
 function Stats() {
   const items = [
-    { icon: GraduationCap, v: "12", l: "Domaines de formation" },
-    { icon: Users2, v: "500+", l: "Apprenants formés" },
-    { icon: Award, v: "100%", l: "Certifiées Ministère" },
-    { icon: ShieldCheck, v: "10+", l: "Années d'expertise" },
+    { icon: GraduationCap, v: 12, suffix: "", l: "Domaines de formation" },
+    { icon: Users2, v: 500, suffix: "+", l: "Apprenants formés" },
+    { icon: Award, v: 100, suffix: "%", l: "Certifiées Ministère" },
+    { icon: ShieldCheck, v: 10, suffix: "+", l: "Années d'expertise" },
   ];
   return (
     <section className="border-y border-border bg-secondary/40">
       <div className="mx-auto grid max-w-7xl grid-cols-2 gap-6 px-4 py-10 md:grid-cols-4 md:px-8">
-        {items.map((s) => (
-          <div key={s.l} className="flex items-center gap-3">
-            <div className="grid h-12 w-12 place-items-center rounded-xl bg-gradient-brand text-white">
+        {items.map((s, i) => (
+          <div
+            key={s.l}
+            className="flex items-center gap-3 animate-fade-in opacity-0 [animation-fill-mode:forwards] hover-scale"
+            style={{ animationDelay: `${i * 120}ms` }}
+          >
+            <div className="grid h-12 w-12 place-items-center rounded-xl bg-gradient-brand text-white shadow-elegant transition-transform duration-300 hover:scale-110 hover:rotate-3">
               <s.icon className="h-6 w-6" />
             </div>
             <div>
-              <div className="text-2xl font-extrabold text-brand-blue-deep">{s.v}</div>
+              <div className="text-2xl font-extrabold text-brand-blue-deep">
+                <CountUp end={s.v} suffix={s.suffix} delay={i * 150} />
+              </div>
               <div className="text-xs uppercase tracking-wider text-muted-foreground">{s.l}</div>
             </div>
           </div>
