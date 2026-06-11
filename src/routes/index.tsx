@@ -35,6 +35,36 @@ function HomePage() {
   );
 }
 
+function CountUp({ end, suffix = "", duration = 1600, delay = 0 }: { end: number; suffix?: string; duration?: number; delay?: number }) {
+  const [val, setVal] = useState(0);
+  const ref = useRef<HTMLSpanElement>(null);
+  const started = useRef(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const run = () => {
+      if (started.current) return;
+      started.current = true;
+      const start = performance.now() + delay;
+      let raf = 0;
+      const tick = (now: number) => {
+        const t = Math.min(1, Math.max(0, (now - start) / duration));
+        const eased = 1 - Math.pow(1 - t, 3);
+        setVal(Math.round(end * eased));
+        if (t < 1) raf = requestAnimationFrame(tick);
+      };
+      raf = requestAnimationFrame(tick);
+      return () => cancelAnimationFrame(raf);
+    };
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => e.isIntersecting && run());
+    }, { threshold: 0.3 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [end, duration, delay]);
+  return <span ref={ref}>{val}{suffix}</span>;
+}
+
 function Hero() {
   return (
     <section className="relative overflow-hidden">
