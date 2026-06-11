@@ -143,7 +143,7 @@ function Stats() {
         {items.map((s, i) => (
           <div
             key={s.l}
-            className="flex items-center gap-3 animate-fade-in opacity-0 [animation-fill-mode:forwards] hover-scale"
+            className="flex items-center gap-3 animate-hero-rise"
             style={{ animationDelay: `${i * 120}ms` }}
           >
             <div className="grid h-12 w-12 place-items-center rounded-xl bg-gradient-brand text-white shadow-elegant transition-transform duration-300 hover:scale-110 hover:rotate-3">
