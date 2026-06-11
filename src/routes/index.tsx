@@ -208,7 +208,7 @@ function FormationsPreview() {
             <div className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Nos domaines</div>
             <h2 className="mt-3 text-4xl font-bold text-brand-blue-deep md:text-5xl">Formations phares</h2>
           </div>
-          <Button asChild variant="outline" className="shrink-0">
+          <Button asChild className="shrink-0 bg-red-600 text-white shadow-elegant hover:bg-red-700 focus-visible:ring-red-600">
             <Link to="/formations">Toutes les formations <ArrowRight className="ml-2 h-4 w-4" /></Link>
           </Button>
         </div>
