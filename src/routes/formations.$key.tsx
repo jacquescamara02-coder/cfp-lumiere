@@ -11,16 +11,16 @@ export const Route = createFileRoute("/formations/$key")({
   loader: ({ params }) => {
     const formation = FORMATIONS.find((f) => f.key === params.key);
     if (!formation) throw notFound();
-    return { formation };
+    return { key: formation.key, title: formation.title, description: formation.description };
   },
   head: ({ loaderData }) => ({
     meta: loaderData
       ? [
-          { title: `${loaderData.formation.title} — Formation CFP Lumière` },
-          { name: "description", content: loaderData.formation.description },
-          { property: "og:title", content: `${loaderData.formation.title} — CFP Lumière` },
-          { property: "og:description", content: loaderData.formation.description },
-          { property: "og:image", content: FORMATION_IMAGES[loaderData.formation.key] },
+          { title: `${loaderData.title} — Formation CFP Lumière` },
+          { name: "description", content: loaderData.description },
+          { property: "og:title", content: `${loaderData.title} — CFP Lumière` },
+          { property: "og:description", content: loaderData.description },
+          { property: "og:image", content: FORMATION_IMAGES[loaderData.key] },
         ]
       : [],
   }),
@@ -49,7 +49,8 @@ export const Route = createFileRoute("/formations/$key")({
 });
 
 function FormationDetail() {
-  const { formation } = Route.useLoaderData();
+  const { key } = Route.useParams();
+  const formation = FORMATIONS.find((f) => f.key === key)!;
   const img = FORMATION_IMAGES[formation.key];
   const Icon = formation.icon;
 
