@@ -17,7 +17,8 @@ const compta = comptaAsset.url;
 import methodesAsset from "@/assets/training-methodes-new.jpg.asset.json";
 const methodes = methodesAsset.url;
 import langues from "@/assets/training-langues.jpg";
-import appro from "@/assets/training-appro.jpg";
+import approAsset from "@/assets/training-appro-new.jpg.asset.json";
+const appro = approAsset.url;
 
 export const FORMATION_IMAGES: Record<string, string> = {
   gestion: business,
