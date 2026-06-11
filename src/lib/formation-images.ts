@@ -14,7 +14,7 @@ import leadershipAsset from "@/assets/training-leadership-new.jpg.asset.json";
 const leadership = leadershipAsset.url;
 import comptaAsset from "@/assets/training-compta-new.jpg.asset.json";
 const compta = comptaAsset.url;
-import methodesAsset from "@/assets/training-methodes-new.jpg.asset.json";
+import methodesAsset from "@/assets/training-methodes-v2.jpg.asset.json";
 const methodes = methodesAsset.url;
 import langues from "@/assets/training-langues.jpg";
 import approAsset from "@/assets/training-appro-new.jpg.asset.json";
