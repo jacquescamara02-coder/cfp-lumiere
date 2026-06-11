@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { ShieldCheck, Lock, LogOut, PlayCircle, Clock, Filter, Sparkles } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
+import { BackHomeButton } from "@/components/BackHomeButton";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -66,7 +67,8 @@ function EspacePage() {
       <section className="border-b border-border bg-gradient-hero text-white">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-4 py-10 md:px-8">
           <div>
-            <div className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Espace privé</div>
+            <BackHomeButton />
+            <div className="mt-4 text-xs font-semibold uppercase tracking-[0.2em] text-accent">Espace privé</div>
             <h1 className="mt-2 text-3xl font-bold md:text-4xl">Bienvenue {profile?.full_name ?? user.email}</h1>
             <p className="mt-1 text-sm text-white/80">
               {isAdmin ? "Vous êtes administrateur." : profile?.access_granted ? "Votre accès aux vidéos est actif." : "Votre compte est en attente de validation."}

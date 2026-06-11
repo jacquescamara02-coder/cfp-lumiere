@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { z } from "zod";
 import { Mail, MapPin, Phone, Send, MessageCircle, Clock, ExternalLink } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
+import { BackHomeButton } from "@/components/BackHomeButton";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -39,7 +40,8 @@ function ContactPage() {
     <SiteLayout>
       <section className="bg-gradient-hero text-white">
         <div className="mx-auto max-w-7xl px-4 py-16 md:px-8">
-          <div className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Contact</div>
+          <BackHomeButton />
+          <div className="mt-5 text-xs font-semibold uppercase tracking-[0.2em] text-accent">Contact</div>
           <h1 className="mt-3 text-4xl font-extrabold md:text-5xl">Parlons de votre projet de formation</h1>
           <p className="mt-4 max-w-2xl text-white/85">
             Notre équipe vous répond rapidement. Choisissez le canal qui vous convient.
