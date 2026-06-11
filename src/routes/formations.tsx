@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
+import { BackHomeButton } from "@/components/BackHomeButton";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FORMATIONS } from "@/lib/formations";
