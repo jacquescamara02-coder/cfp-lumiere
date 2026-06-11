@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useRef, useState } from "react";
 import { ArrowRight, Award, CheckCircle2, GraduationCap, MapPin, Phone, ShieldCheck, Star, Users2, Sparkles } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { Button } from "@/components/ui/button";
@@ -34,6 +35,36 @@ function HomePage() {
   );
 }
 
+function CountUp({ end, suffix = "", duration = 1600, delay = 0 }: { end: number; suffix?: string; duration?: number; delay?: number }) {
+  const [val, setVal] = useState(0);
+  const ref = useRef<HTMLSpanElement>(null);
+  const started = useRef(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const run = () => {
+      if (started.current) return;
+      started.current = true;
+      const start = performance.now() + delay;
+      let raf = 0;
+      const tick = (now: number) => {
+        const t = Math.min(1, Math.max(0, (now - start) / duration));
+        const eased = 1 - Math.pow(1 - t, 3);
+        setVal(Math.round(end * eased));
+        if (t < 1) raf = requestAnimationFrame(tick);
+      };
+      raf = requestAnimationFrame(tick);
+      return () => cancelAnimationFrame(raf);
+    };
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => e.isIntersecting && run());
+    }, { threshold: 0.3 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [end, duration, delay]);
+  return <span ref={ref}>{val}{suffix}</span>;
+}
+
 function Hero() {
   return (
     <section className="relative overflow-hidden">
@@ -61,9 +92,6 @@ function Hero() {
             <Button asChild size="lg" variant="outline" className="border-white/40 bg-white/10 text-white backdrop-blur hover:bg-white hover:text-brand-blue-deep">
               <Link to="/contact">Nous contacter</Link>
             </Button>
-            <Button asChild size="lg" variant="ghost" className="text-white hover:bg-white/15">
-              <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer">WhatsApp direct</a>
-            </Button>
           </div>
           <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-white/80">
             <span className="flex items-center gap-2"><MapPin className="h-4 w-4 text-accent" />Av. Lomami, Lubumbashi</span>
@@ -81,12 +109,14 @@ function Hero() {
             </div>
             <div className="mt-6 grid grid-cols-3 gap-3 text-center text-white">
               {[
-                { v: "12+", l: "Domaines" },
-                { v: "500+", l: "Apprenants" },
-                { v: "10+", l: "Ans d'expertise" },
-              ].map((s) => (
-                <div key={s.l} className="rounded-xl bg-white/10 p-3">
-                  <div className="text-xl font-extrabold text-accent">{s.v}</div>
+                { v: 12, suffix: "+", l: "Domaines" },
+                { v: 500, suffix: "+", l: "Apprenants" },
+                { v: 10, suffix: "+", l: "Ans d'expertise" },
+              ].map((s, i) => (
+                <div key={s.l} className="rounded-xl bg-white/10 p-3 transition-transform hover:-translate-y-0.5">
+                  <div className="text-xl font-extrabold text-accent">
+                    <CountUp end={s.v} suffix={s.suffix} delay={i * 200} />
+                  </div>
                   <div className="text-[10px] uppercase tracking-wider text-white/70">{s.l}</div>
                 </div>
               ))}
