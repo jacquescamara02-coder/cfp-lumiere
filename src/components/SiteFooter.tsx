@@ -9,10 +9,10 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 md:grid-cols-4 md:px-8">
         <div className="space-y-4">
           <div className="flex items-center gap-3">
-            <img src={logo} alt="" className="h-12 w-12 rounded-lg bg-white p-1" />
+            <img src={logo} alt="" className="h-20 w-20 rounded-lg bg-white p-1.5" />
             <div>
-              <div className="font-bold">{SITE.name}</div>
-              <div className="text-xs uppercase tracking-wider text-white/70">EDCP</div>
+              <div className="text-lg font-bold">{SITE.name}</div>
+              <div className="text-xs uppercase tracking-wider text-white/70">Lubumbashi</div>
             </div>
           </div>
           <p className="text-sm leading-relaxed text-white/75">
