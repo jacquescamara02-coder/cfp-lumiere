@@ -14,6 +14,7 @@ import { Route as EspaceFormationRouteImport } from './routes/espace-formation'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as FormationsIndexRouteImport } from './routes/formations.index'
 import { Route as FormationsKeyRouteImport } from './routes/formations.$key'
 
 const FormationsRoute = FormationsRouteImport.update({
@@ -41,6 +42,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FormationsIndexRoute = FormationsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => FormationsRoute,
+} as any)
 const FormationsKeyRoute = FormationsKeyRouteImport.update({
   id: '/$key',
   path: '/$key',
@@ -54,14 +60,15 @@ export interface FileRoutesByFullPath {
   '/espace-formation': typeof EspaceFormationRoute
   '/formations': typeof FormationsRouteWithChildren
   '/formations/$key': typeof FormationsKeyRoute
+  '/formations/': typeof FormationsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/espace-formation': typeof EspaceFormationRoute
-  '/formations': typeof FormationsRouteWithChildren
   '/formations/$key': typeof FormationsKeyRoute
+  '/formations': typeof FormationsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -71,6 +78,7 @@ export interface FileRoutesById {
   '/espace-formation': typeof EspaceFormationRoute
   '/formations': typeof FormationsRouteWithChildren
   '/formations/$key': typeof FormationsKeyRoute
+  '/formations/': typeof FormationsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -81,14 +89,15 @@ export interface FileRouteTypes {
     | '/espace-formation'
     | '/formations'
     | '/formations/$key'
+    | '/formations/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth'
     | '/contact'
     | '/espace-formation'
-    | '/formations'
     | '/formations/$key'
+    | '/formations'
   id:
     | '__root__'
     | '/'
@@ -97,6 +106,7 @@ export interface FileRouteTypes {
     | '/espace-formation'
     | '/formations'
     | '/formations/$key'
+    | '/formations/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -144,6 +154,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/formations/': {
+      id: '/formations/'
+      path: '/'
+      fullPath: '/formations/'
+      preLoaderRoute: typeof FormationsIndexRouteImport
+      parentRoute: typeof FormationsRoute
+    }
     '/formations/$key': {
       id: '/formations/$key'
       path: '/$key'
@@ -156,10 +173,12 @@ declare module '@tanstack/react-router' {
 
 interface FormationsRouteChildren {
   FormationsKeyRoute: typeof FormationsKeyRoute
+  FormationsIndexRoute: typeof FormationsIndexRoute
 }
 
 const FormationsRouteChildren: FormationsRouteChildren = {
   FormationsKeyRoute: FormationsKeyRoute,
+  FormationsIndexRoute: FormationsIndexRoute,
 }
 
 const FormationsRouteWithChildren = FormationsRoute._addFileChildren(
