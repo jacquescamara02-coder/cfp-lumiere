@@ -7,8 +7,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { FORMATIONS, TESTIMONIALS, FAQ } from "@/lib/formations";
 import { SITE, whatsappUrl } from "@/lib/site";
-import hero from "@/assets/hero-classroom.jpg";
+import heroAsset from "@/assets/hero-classroom-real.jpg.asset.json";
 import logo from "@/assets/cfp-logo.png";
+const hero = heroAsset.url;
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -68,9 +69,9 @@ function CountUp({ end, suffix = "", duration = 1600, delay = 0 }: { end: number
 function Hero() {
   return (
     <section className="relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-hero" />
-      <div className="absolute inset-0 opacity-25" style={{ backgroundImage: `url(${hero})`, backgroundSize: "cover", backgroundPosition: "center" }} />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(255,255,255,0.15),_transparent_60%)]" />
+      <div className="absolute inset-0" style={{ backgroundImage: `url(${hero})`, backgroundSize: "cover", backgroundPosition: "center" }} />
+      <div className="absolute inset-0 bg-gradient-hero opacity-85" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(255,255,255,0.12),_transparent_60%)]" />
       <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-20 md:grid-cols-[1.2fr_1fr] md:px-8 md:py-28">
         <div className="text-white">
           <div className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-xs font-medium backdrop-blur">
