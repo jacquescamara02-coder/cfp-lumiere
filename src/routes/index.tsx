@@ -79,12 +79,14 @@ function Hero() {
             </div>
             <div className="mt-6 grid grid-cols-3 gap-3 text-center text-white">
               {[
-                { v: "12+", l: "Domaines" },
-                { v: "500+", l: "Apprenants" },
-                { v: "10+", l: "Ans d'expertise" },
-              ].map((s) => (
-                <div key={s.l} className="rounded-xl bg-white/10 p-3">
-                  <div className="text-xl font-extrabold text-accent">{s.v}</div>
+                { v: 12, suffix: "+", l: "Domaines" },
+                { v: 500, suffix: "+", l: "Apprenants" },
+                { v: 10, suffix: "+", l: "Ans d'expertise" },
+              ].map((s, i) => (
+                <div key={s.l} className="rounded-xl bg-white/10 p-3 transition-transform hover:-translate-y-0.5">
+                  <div className="text-xl font-extrabold text-accent">
+                    <CountUp end={s.v} suffix={s.suffix} delay={i * 200} />
+                  </div>
                   <div className="text-[10px] uppercase tracking-wider text-white/70">{s.l}</div>
                 </div>
               ))}
