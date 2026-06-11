@@ -14,6 +14,7 @@ import { Route as EspaceFormationRouteImport } from './routes/espace-formation'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as FormationsKeyRouteImport } from './routes/formations.$key'
 
 const FormationsRoute = FormationsRouteImport.update({
   id: '/formations',
@@ -40,20 +41,27 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FormationsKeyRoute = FormationsKeyRouteImport.update({
+  id: '/$key',
+  path: '/$key',
+  getParentRoute: () => FormationsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/espace-formation': typeof EspaceFormationRoute
-  '/formations': typeof FormationsRoute
+  '/formations': typeof FormationsRouteWithChildren
+  '/formations/$key': typeof FormationsKeyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/espace-formation': typeof EspaceFormationRoute
-  '/formations': typeof FormationsRoute
+  '/formations': typeof FormationsRouteWithChildren
+  '/formations/$key': typeof FormationsKeyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -61,13 +69,26 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/espace-formation': typeof EspaceFormationRoute
-  '/formations': typeof FormationsRoute
+  '/formations': typeof FormationsRouteWithChildren
+  '/formations/$key': typeof FormationsKeyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/contact' | '/espace-formation' | '/formations'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/contact'
+    | '/espace-formation'
+    | '/formations'
+    | '/formations/$key'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/contact' | '/espace-formation' | '/formations'
+  to:
+    | '/'
+    | '/auth'
+    | '/contact'
+    | '/espace-formation'
+    | '/formations'
+    | '/formations/$key'
   id:
     | '__root__'
     | '/'
@@ -75,6 +96,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/espace-formation'
     | '/formations'
+    | '/formations/$key'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -82,7 +104,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   ContactRoute: typeof ContactRoute
   EspaceFormationRoute: typeof EspaceFormationRoute
-  FormationsRoute: typeof FormationsRoute
+  FormationsRoute: typeof FormationsRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -122,16 +144,45 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/formations/$key': {
+      id: '/formations/$key'
+      path: '/$key'
+      fullPath: '/formations/$key'
+      preLoaderRoute: typeof FormationsKeyRouteImport
+      parentRoute: typeof FormationsRoute
+    }
   }
 }
+
+interface FormationsRouteChildren {
+  FormationsKeyRoute: typeof FormationsKeyRoute
+}
+
+const FormationsRouteChildren: FormationsRouteChildren = {
+  FormationsKeyRoute: FormationsKeyRoute,
+}
+
+const FormationsRouteWithChildren = FormationsRoute._addFileChildren(
+  FormationsRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRoute,
   ContactRoute: ContactRoute,
   EspaceFormationRoute: EspaceFormationRoute,
-  FormationsRoute: FormationsRoute,
+  FormationsRoute: FormationsRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
