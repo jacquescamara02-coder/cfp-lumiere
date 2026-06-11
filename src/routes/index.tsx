@@ -62,9 +62,6 @@ function Hero() {
             <Button asChild size="lg" variant="outline" className="border-white/40 bg-white/10 text-white backdrop-blur hover:bg-white hover:text-brand-blue-deep">
               <Link to="/contact">Nous contacter</Link>
             </Button>
-            <Button asChild size="lg" variant="ghost" className="text-white hover:bg-white/15">
-              <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer">WhatsApp direct</a>
-            </Button>
           </div>
           <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-white/80">
             <span className="flex items-center gap-2"><MapPin className="h-4 w-4 text-accent" />Av. Lomami, Lubumbashi</span>
