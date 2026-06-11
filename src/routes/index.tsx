@@ -84,7 +84,6 @@ function Hero() {
           </h1>
           <p className="mt-6 max-w-xl text-lg text-white/85">
             CFP Lumière, l'<strong>Espace de Développement des Compétences Professionnelles</strong> de Lubumbashi.
-            Formations sur mesure en entreprise ou dans nos locaux : gestion, technique, journalisme, leadership et plus.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button asChild size="lg" className="bg-accent text-white shadow-elegant hover:bg-[var(--brand-red-deep)]">
