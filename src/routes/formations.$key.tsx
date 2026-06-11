@@ -49,7 +49,8 @@ export const Route = createFileRoute("/formations/$key")({
 });
 
 function FormationDetail() {
-  const { formation } = Route.useLoaderData();
+  const { key } = Route.useParams();
+  const formation = FORMATIONS.find((f) => f.key === key)!;
   const img = FORMATION_IMAGES[formation.key];
   const Icon = formation.icon;
 
