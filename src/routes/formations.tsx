@@ -9,7 +9,8 @@ import { FORMATION_IMAGES } from "@/lib/formation-images";
 import { whatsappUrl } from "@/lib/site";
 import business from "@/assets/training-business.jpg";
 import tech from "@/assets/training-tech.jpg";
-import journalism from "@/assets/training-journalism.jpg";
+import journalismFeatured from "@/assets/training-journalism-featured.jpg.asset.json";
+const journalism = journalismFeatured.url;
 
 export const Route = createFileRoute("/formations")({
   head: () => ({
