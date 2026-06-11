@@ -204,12 +204,12 @@ function FormationsPreview() {
   return (
     <section className="bg-secondary/40 py-20">
       <div className="mx-auto max-w-7xl px-4 md:px-8">
-        <div className="flex items-end justify-between gap-6">
+        <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end sm:gap-6">
           <div>
             <div className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Nos domaines</div>
             <h2 className="mt-3 text-4xl font-bold text-brand-blue-deep md:text-5xl">Formations phares</h2>
           </div>
-          <Button asChild variant="outline" className="hidden md:inline-flex">
+          <Button asChild variant="outline" className="shrink-0">
             <Link to="/formations">Toutes les formations <ArrowRight className="ml-2 h-4 w-4" /></Link>
           </Button>
         </div>
