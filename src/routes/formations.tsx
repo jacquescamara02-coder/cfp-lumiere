@@ -4,6 +4,7 @@ import { SiteLayout } from "@/components/SiteLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FORMATIONS } from "@/lib/formations";
+import { FORMATION_IMAGES } from "@/lib/formation-images";
 import { whatsappUrl } from "@/lib/site";
 import business from "@/assets/training-business.jpg";
 import tech from "@/assets/training-tech.jpg";
