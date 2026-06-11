@@ -96,7 +96,7 @@ function FormationDetail() {
 
             <div className="mt-10 flex flex-wrap gap-3">
               <Button asChild size="lg" className="bg-gradient-brand text-white shadow-elegant">
-                <Link to="/contact">S'inscrire à cette formation</Link>
+                <Link to="/espace-formation">Accéder à la Formation <Home className="ml-1.5 h-4 w-4" /></Link>
               </Button>
               <Button asChild size="lg" variant="outline">
                 <a href={whatsappUrl(`Bonjour, je souhaite des informations sur la formation "${formation.title}".`)} target="_blank" rel="noopener noreferrer">

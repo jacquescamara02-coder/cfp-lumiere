@@ -30,11 +30,11 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-8">
         <Link to="/" className="flex items-center gap-3">
-          <img src={logo} alt="CFP Lumière" className="h-12 w-12 object-contain" />
+          <img src={logo} alt="CFP Lumière" className="h-16 w-16 object-contain md:h-20 md:w-20" />
           <div className="leading-tight">
-            <div className="text-base font-bold text-brand-blue-deep">{SITE.name}</div>
-            <div className="hidden text-[11px] uppercase tracking-widest text-muted-foreground md:block">
-              EDCP — Lubumbashi
+            <div className="text-lg font-bold text-brand-blue-deep md:text-xl">{SITE.name}</div>
+            <div className="text-[11px] uppercase tracking-widest text-muted-foreground">
+              Lubumbashi
             </div>
           </div>
         </Link>
