@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useRef, useState } from "react";
 import { ArrowRight, Award, CheckCircle2, GraduationCap, MapPin, Phone, ShieldCheck, Star, Users2, Sparkles } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { Button } from "@/components/ui/button";
