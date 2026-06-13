@@ -74,7 +74,7 @@ export const FORMATIONS: FormationCategory[] = [
   },
   {
     key: "methodes",
-    title: "Méthodes & Didactique",
+    title: "Méthodes & Didactiques",
     icon: ShieldCheck,
     description: "Approches pédagogiques modernes : par compétence et par objectif.",
     topics: ["Approche par compétence", "Approche par objectif", "Fiche de préparation"],
