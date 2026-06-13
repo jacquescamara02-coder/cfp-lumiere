@@ -81,11 +81,11 @@ function Hero() {
             Certifié par le Ministère de la Formation et des Métiers
           </div>
           <h1 className="mt-6 text-4xl font-extrabold leading-tight md:text-6xl animate-hero-rise" style={{ animationDelay: "120ms" }}>
-            Développez vos <span className="text-accent">compétences</span><br />
-            forgez votre <span className="underline decoration-accent decoration-4 underline-offset-4">avenir</span>.
+            Venez{"\u00a0"}développer vos <span className="text-accent">compétences,</span> et<br />
+            forger votre <span className="underline decoration-accent decoration-4 underline-offset-4">avenir</span>.
           </h1>
           <p className="mt-6 max-w-xl text-lg text-white/85 animate-hero-rise" style={{ animationDelay: "260ms" }}>
-            CFP Lumière, l'<strong>Espace de Développement des Compétences Professionnelles</strong> de Lubumbashi.
+            {"\n"}
           </p>
           <div className="mt-8 flex flex-wrap gap-3 animate-hero-rise" style={{ animationDelay: "400ms" }}>
             <Button asChild size="lg" className="bg-accent text-white shadow-elegant transition-transform hover:-translate-y-0.5 hover:bg-[var(--brand-red-deep)]">
