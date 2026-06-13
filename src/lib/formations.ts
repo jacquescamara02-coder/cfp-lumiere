@@ -69,7 +69,7 @@ export const FORMATIONS: FormationCategory[] = [
     key: "compta",
     title: "Comptabilité & Contrôle qualité",
     icon: Calculator,
-    description: "Comptabilité, gestion RH, contrôle qualité — en milieu de travail ou en externe.",
+    description: "Comptabilité, gestion RH, contrôle qualité — en milieu de travail ou dans nos locaux.",
     topics: ["Comptabilité", "RH", "Contrôle qualité"],
   },
   {
