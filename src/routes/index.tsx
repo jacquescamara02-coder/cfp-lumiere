@@ -96,7 +96,7 @@ function Hero() {
             </Button>
           </div>
           <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-white/80 animate-hero-rise" style={{ animationDelay: "540ms" }}>
-            <span className="flex items-center gap-2"><MapPin className="h-4 w-4 text-accent" />Av. Lomami, Lubumbashi</span>
+            <span className="flex items-center gap-2"><MapPin className="h-4 w-4 text-accent" />Av. Lomami, impasse derrière la cour d'Appel de Lubumbashi</span>
             <span className="flex items-center gap-2"><Phone className="h-4 w-4 text-accent" />{SITE.phoneDisplay}</span>
           </div>
         </div>
