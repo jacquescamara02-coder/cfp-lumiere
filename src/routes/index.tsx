@@ -187,10 +187,10 @@ function About() {
 
         <div className="grid gap-4 sm:grid-cols-2">
           {[
-            { t: "Sur mesure", d: "Formations adaptées en entreprise ou dans nos locaux." },
-            { t: "Pédagogie moderne", d: "Approche par compétence et par objectif." },
+            { t: "Sur mesure", d: "Formations adaptées au besoin de l'apprenant, elle peut se dérouler en entreprise ou dans nos locaux." },
+            { t: "Pédagogie\u00a0", d: "Approches par compétence et par objectif." },
             { t: "Encadrement expert", d: "Consortium de formateurs qualifiés." },
-            { t: "Certification reconnue", d: "Validée par le Ministère de la Formation et des Métiers." },
+            { t: "Certification reconnue", d: "Validée par le Ministère de la Formation et des Métiers de la RDC." },
           ].map((c) => (
             <Card key={c.t} className="border-border/60 shadow-card">
               <CardContent className="p-5">
