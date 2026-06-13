@@ -14,6 +14,30 @@ export type Database = {
   }
   public: {
     Tables: {
+      announcements: {
+        Row: {
+          body: string
+          created_at: string
+          created_by: string | null
+          id: string
+          title: string
+        }
+        Insert: {
+          body: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          title: string
+        }
+        Update: {
+          body?: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          title?: string
+        }
+        Relationships: []
+      }
       contact_messages: {
         Row: {
           created_at: string
@@ -44,27 +68,110 @@ export type Database = {
         }
         Relationships: []
       }
+      enrollments: {
+        Row: {
+          enrolled_at: string
+          id: string
+          status: string
+          training_id: string
+          user_id: string
+        }
+        Insert: {
+          enrolled_at?: string
+          id?: string
+          status?: string
+          training_id: string
+          user_id: string
+        }
+        Update: {
+          enrolled_at?: string
+          id?: string
+          status?: string
+          training_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "enrollments_training_id_fkey"
+            columns: ["training_id"]
+            isOneToOne: false
+            referencedRelation: "trainings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      live_sessions: {
+        Row: {
+          category: string
+          created_at: string
+          created_by: string | null
+          description: string | null
+          duration_minutes: number | null
+          host_name: string | null
+          id: string
+          join_url: string
+          platform: string
+          scheduled_at: string
+          status: string
+          title: string
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          duration_minutes?: number | null
+          host_name?: string | null
+          id?: string
+          join_url: string
+          platform?: string
+          scheduled_at: string
+          status?: string
+          title: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          duration_minutes?: number | null
+          host_name?: string | null
+          id?: string
+          join_url?: string
+          platform?: string
+          scheduled_at?: string
+          status?: string
+          title?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           access_granted: boolean
           created_at: string
+          email: string | null
           full_name: string | null
           id: string
           phone: string | null
+          status: string
         }
         Insert: {
           access_granted?: boolean
           created_at?: string
+          email?: string | null
           full_name?: string | null
           id: string
           phone?: string | null
+          status?: string
         }
         Update: {
           access_granted?: boolean
           created_at?: string
+          email?: string | null
           full_name?: string | null
           id?: string
           phone?: string | null
+          status?: string
         }
         Relationships: []
       }
@@ -74,8 +181,14 @@ export type Database = {
           created_at: string
           description: string | null
           duration_minutes: number | null
+          format: string
           id: string
+          instructor: string | null
+          level: string | null
+          prerequisites: string | null
           published: boolean
+          resources_url: string | null
+          system_requirements: string | null
           thumbnail_url: string | null
           title: string
           video_url: string
@@ -85,8 +198,14 @@ export type Database = {
           created_at?: string
           description?: string | null
           duration_minutes?: number | null
+          format?: string
           id?: string
+          instructor?: string | null
+          level?: string | null
+          prerequisites?: string | null
           published?: boolean
+          resources_url?: string | null
+          system_requirements?: string | null
           thumbnail_url?: string | null
           title: string
           video_url: string
@@ -96,8 +215,14 @@ export type Database = {
           created_at?: string
           description?: string | null
           duration_minutes?: number | null
+          format?: string
           id?: string
+          instructor?: string | null
+          level?: string | null
+          prerequisites?: string | null
           published?: boolean
+          resources_url?: string | null
+          system_requirements?: string | null
           thumbnail_url?: string | null
           title?: string
           video_url?: string

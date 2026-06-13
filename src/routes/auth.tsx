@@ -67,7 +67,7 @@ function AuthPage() {
     if (!parsed.success) return toast.error(parsed.error.issues[0]?.message ?? "Champs invalides");
     setLoading(true);
     const redirectTo = `${window.location.origin}/espace-formation`;
-    const { error } = await supabase.auth.signUp({
+    const { data: signupData, error } = await supabase.auth.signUp({
       email: parsed.data.email,
       password: parsed.data.password,
       options: {
@@ -75,11 +75,20 @@ function AuthPage() {
         data: { full_name: parsed.data.full_name, phone: parsed.data.phone ?? "" },
       },
     });
+    if (!error && signupData.user) {
+      await supabase.from("profiles").upsert({
+        id: signupData.user.id,
+        full_name: parsed.data.full_name,
+        phone: parsed.data.phone ?? null,
+        email: parsed.data.email,
+      }, { onConflict: "id" });
+    }
     setLoading(false);
     if (error) return toast.error(error.message);
     toast.success("Compte créé ! Votre accès aux vidéos sera activé par l'administrateur.");
     setTab("login");
   }
+
 
   return (
     <SiteLayout>
