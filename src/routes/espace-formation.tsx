@@ -487,34 +487,68 @@ function toEmbedUrl(url: string): string | null {
   return null;
 }
 
+async function uploadToBucket(file: File, folder: string): Promise<string> {
+  const ext = file.name.includes(".") ? file.name.split(".").pop() : "bin";
+  const path = `${folder}/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
+  const { error } = await supabase.storage.from("training-assets").upload(path, file, {
+    cacheControl: "3600", upsert: false, contentType: file.type || undefined,
+  });
+  if (error) throw error;
+  const { data, error: sErr } = await supabase.storage.from("training-assets").createSignedUrl(path, 60 * 60 * 24 * 365);
+  if (sErr || !data?.signedUrl) throw sErr ?? new Error("Impossible de générer l'URL");
+  return data.signedUrl;
+}
+
 function AdminAddVideo({ onCreated }: { onCreated: () => void }) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [videoFile, setVideoFile] = useState<File | null>(null);
+  const [thumbFile, setThumbFile] = useState<File | null>(null);
+  const [resourceFile, setResourceFile] = useState<File | null>(null);
+  const [progress, setProgress] = useState<string>("");
 
   async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const f = new FormData(e.currentTarget);
     setLoading(true);
-    const { error } = await supabase.from("trainings").insert({
-      title: String(f.get("title") ?? "").trim(),
-      description: String(f.get("description") ?? "").trim() || null,
-      category: String(f.get("category") ?? "Général").trim(),
-      video_url: String(f.get("video_url") ?? "").trim(),
-      thumbnail_url: String(f.get("thumbnail_url") ?? "").trim() || null,
-      duration_minutes: f.get("duration") ? Number(f.get("duration")) : null,
-      level: String(f.get("level") ?? "").trim() || null,
-      format: String(f.get("format") ?? "video").trim(),
-      instructor: String(f.get("instructor") ?? "").trim() || null,
-      prerequisites: String(f.get("prerequisites") ?? "").trim() || null,
-      system_requirements: String(f.get("system_requirements") ?? "").trim() || null,
-      resources_url: String(f.get("resources_url") ?? "").trim() || null,
-      published: true,
-    });
-    setLoading(false);
-    if (error) return toast.error(error.message);
-    toast.success("Formation publiée");
-    setOpen(false);
-    onCreated();
+    try {
+      let video_url = String(f.get("video_url") ?? "").trim();
+      let thumbnail_url = String(f.get("thumbnail_url") ?? "").trim();
+      let resources_url = String(f.get("resources_url") ?? "").trim();
+
+      if (videoFile) { setProgress("Téléversement de la vidéo..."); video_url = await uploadToBucket(videoFile, "videos"); }
+      if (thumbFile) { setProgress("Téléversement de la miniature..."); thumbnail_url = await uploadToBucket(thumbFile, "thumbnails"); }
+      if (resourceFile) { setProgress("Téléversement des ressources..."); resources_url = await uploadToBucket(resourceFile, "resources"); }
+
+      if (!video_url) { setLoading(false); setProgress(""); return toast.error("Ajoutez une URL ou téléversez un fichier vidéo/document."); }
+
+      setProgress("Enregistrement...");
+      const { error } = await supabase.from("trainings").insert({
+        title: String(f.get("title") ?? "").trim(),
+        description: String(f.get("description") ?? "").trim() || null,
+        category: String(f.get("category") ?? "Général").trim(),
+        video_url,
+        thumbnail_url: thumbnail_url || null,
+        duration_minutes: f.get("duration") ? Number(f.get("duration")) : null,
+        level: String(f.get("level") ?? "").trim() || null,
+        format: String(f.get("format") ?? "video").trim(),
+        instructor: String(f.get("instructor") ?? "").trim() || null,
+        prerequisites: String(f.get("prerequisites") ?? "").trim() || null,
+        system_requirements: String(f.get("system_requirements") ?? "").trim() || null,
+        resources_url: resources_url || null,
+        published: true,
+      });
+      if (error) throw error;
+      toast.success("Formation publiée");
+      setOpen(false);
+      setVideoFile(null); setThumbFile(null); setResourceFile(null);
+      onCreated();
+    } catch (err) {
+      toast.error((err as Error).message);
+    } finally {
+      setLoading(false);
+      setProgress("");
+    }
   }
 
   return (
@@ -544,19 +578,44 @@ function AdminAddVideo({ onCreated }: { onCreated: () => void }) {
             </select>
           </div>
           <div><Label>Intervenant</Label><Input name="instructor" maxLength={120} /></div>
-          <div className="sm:col-span-2"><Label>URL vidéo (YouTube, Vimeo, Loom, mp4) *</Label><Input name="video_url" required type="url" /></div>
-          <div><Label>URL miniature</Label><Input name="thumbnail_url" type="url" /></div>
+
+          <div className="sm:col-span-2 rounded-lg border border-dashed border-border bg-secondary/30 p-3">
+            <Label className="text-brand-blue-deep">Vidéo / Document principal *</Label>
+            <p className="mb-2 text-xs text-muted-foreground">Téléversez depuis votre appareil OU collez une URL externe (YouTube, Vimeo, Loom, mp4...).</p>
+            <Input type="file" accept="video/*,application/pdf,.doc,.docx,.ppt,.pptx" onChange={(e) => setVideoFile(e.target.files?.[0] ?? null)} />
+            {videoFile && <p className="mt-1 text-xs text-muted-foreground">Fichier : {videoFile.name} ({(videoFile.size / 1024 / 1024).toFixed(1)} Mo)</p>}
+            <Input name="video_url" type="url" placeholder="https://... (optionnel si fichier téléversé)" className="mt-2" />
+          </div>
+
+          <div className="sm:col-span-2 rounded-lg border border-dashed border-border bg-secondary/30 p-3">
+            <Label className="text-brand-blue-deep">Miniature</Label>
+            <p className="mb-2 text-xs text-muted-foreground">Image depuis votre appareil OU URL.</p>
+            <Input type="file" accept="image/*" onChange={(e) => setThumbFile(e.target.files?.[0] ?? null)} />
+            {thumbFile && <p className="mt-1 text-xs text-muted-foreground">Image : {thumbFile.name}</p>}
+            <Input name="thumbnail_url" type="url" placeholder="https://... (optionnel)" className="mt-2" />
+          </div>
+
           <div><Label>Durée (minutes)</Label><Input name="duration" type="number" min={1} /></div>
           <div className="sm:col-span-2"><Label>Description</Label><Textarea name="description" rows={2} maxLength={1000} /></div>
           <div className="sm:col-span-2"><Label>Prérequis</Label><Textarea name="prerequisites" rows={2} maxLength={500} placeholder="Connaissances nécessaires..." /></div>
           <div className="sm:col-span-2"><Label>Configuration système (I/O)</Label><Textarea name="system_requirements" rows={2} maxLength={500} placeholder="OS, RAM, logiciels..." /></div>
-          <div className="sm:col-span-2"><Label>URL des ressources (PDF, support)</Label><Input name="resources_url" type="url" /></div>
-          <Button type="submit" disabled={loading} className="bg-gradient-brand text-white sm:col-span-2">{loading ? "Publication..." : "Publier la formation"}</Button>
+
+          <div className="sm:col-span-2 rounded-lg border border-dashed border-border bg-secondary/30 p-3">
+            <Label className="text-brand-blue-deep">Ressources (PDF, support)</Label>
+            <p className="mb-2 text-xs text-muted-foreground">Téléversez un fichier OU collez une URL.</p>
+            <Input type="file" accept="application/pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.zip" onChange={(e) => setResourceFile(e.target.files?.[0] ?? null)} />
+            {resourceFile && <p className="mt-1 text-xs text-muted-foreground">Fichier : {resourceFile.name}</p>}
+            <Input name="resources_url" type="url" placeholder="https://... (optionnel)" className="mt-2" />
+          </div>
+
+          {progress && <p className="text-sm text-muted-foreground sm:col-span-2">{progress}</p>}
+          <Button type="submit" disabled={loading} className="bg-gradient-brand text-white sm:col-span-2">{loading ? (progress || "Publication...") : "Publier la formation"}</Button>
         </form>
       </DialogContent>
     </Dialog>
   );
 }
+
 
 /* ============================================================
    LIVE SESSIONS
