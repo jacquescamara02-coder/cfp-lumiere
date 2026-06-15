@@ -87,10 +87,6 @@ function Hero() {
               ))}
             </div>
           </div>
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-xs font-medium backdrop-blur animate-hero-rise" style={{ animationDelay: "0ms" }}>
-            <Sparkles className="h-3.5 w-3.5 text-accent" />
-            Certifié par le Ministère de la Formation et des Métiers
-          </div>
           <h1 className="mt-6 text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl md:text-[2.85rem] lg:text-6xl xl:text-7xl animate-hero-rise" style={{ animationDelay: "120ms" }}>
             Venez développer vos <span className="text-accent">compétences,</span>
             <br />
