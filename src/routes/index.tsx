@@ -74,9 +74,9 @@ function Hero() {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(255,255,255,0.12),_transparent_60%)]" />
       <div className="pointer-events-none absolute -left-32 top-10 h-80 w-80 rounded-full bg-accent/40 blur-3xl animate-hero-glow" />
       <div className="pointer-events-none absolute -right-20 bottom-0 h-96 w-96 rounded-full bg-brand-blue/40 blur-3xl animate-hero-glow" style={{ animationDelay: "1.5s" }} />
-      <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-20 md:grid-cols-[minmax(0,1.05fr)_minmax(280px,0.85fr)] md:px-8 md:py-28">
+      <div className="relative mx-auto grid max-w-7xl gap-10 px-4 pt-6 pb-20 md:grid-cols-[minmax(0,1.05fr)_minmax(280px,0.85fr)] md:px-8 md:pt-10 md:pb-28">
         <div className="min-w-0 text-white">
-          <div className="mb-3 max-w-[min(100%,30rem)] overflow-hidden rounded-full border border-white/25 bg-white/10 backdrop-blur animate-hero-rise [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]" style={{ animationDelay: "0ms" }}>
+          <div className="mb-4 -mt-2 max-w-[min(100%,30rem)] overflow-hidden rounded-full border border-white/25 bg-white/10 backdrop-blur animate-hero-rise [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]" style={{ animationDelay: "0ms" }}>
             <div className="flex w-max gap-8 whitespace-nowrap py-2 animate-marquee">
               {Array.from({ length: 6 }).map((_, i) => (
                 <span key={i} className="flex items-center gap-2 px-4 text-sm font-semibold tracking-wide text-white">
