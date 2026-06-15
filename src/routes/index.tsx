@@ -76,17 +76,6 @@ function Hero() {
       <div className="pointer-events-none absolute -right-20 bottom-0 h-96 w-96 rounded-full bg-brand-blue/40 blur-3xl animate-hero-glow" style={{ animationDelay: "1.5s" }} />
       <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-20 md:grid-cols-[1.2fr_1fr] md:px-8 md:py-28">
         <div className="text-white">
-          <div className="mb-4 overflow-hidden rounded-full border border-accent/40 bg-white/10 backdrop-blur animate-hero-rise [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
-            <div className="flex w-max items-center whitespace-nowrap py-2 animate-marquee">
-              {Array.from({ length: 6 }).map((_, i) => (
-                <span key={i} className="inline-flex items-center gap-2 pl-10 text-xs font-semibold uppercase tracking-[0.18em] text-white">
-                  <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                  <span className="text-accent">Juin 2026</span>
-                  <span className="text-white/90">— Excel appliqué à l'agronomie</span>
-                </span>
-              ))}
-            </div>
-          </div>
           <div className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-xs font-medium backdrop-blur animate-hero-rise" style={{ animationDelay: "0ms" }}>
             <Sparkles className="h-3.5 w-3.5 text-accent" />
             Certifié par le Ministère de la Formation et des Métiers
