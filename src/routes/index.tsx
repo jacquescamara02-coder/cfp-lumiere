@@ -81,7 +81,7 @@ function Hero() {
             Certifié par le Ministère de la Formation et des Métiers
           </div>
           <h1 className="mt-6 text-4xl font-extrabold leading-[1.05] tracking-tight md:text-6xl lg:text-7xl animate-hero-rise" style={{ animationDelay: "120ms" }}>
-            Venez développer vos <span className="text-accent">compétences,</span>
+            Venez&nbsp; développer vos&nbsp;&nbsp;<span className="text-accent">compétences,</span>
             <br />
             et forger votre <span className="underline decoration-accent decoration-4 underline-offset-[6px]">avenir</span>.
           </h1>
