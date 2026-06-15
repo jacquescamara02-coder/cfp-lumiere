@@ -80,9 +80,10 @@ function Hero() {
             <Sparkles className="h-3.5 w-3.5 text-accent" />
             Certifié par le Ministère de la Formation et des Métiers
           </div>
-          <h1 className="mt-6 text-4xl font-extrabold leading-tight md:text-6xl animate-hero-rise" style={{ animationDelay: "120ms" }}>
-            Venez{"\u00a0\u00a0"}développer vos <span className="text-accent">compétences,</span> et<br />
-            forger votre <span className="underline decoration-accent decoration-4 underline-offset-4">avenir</span>.
+          <h1 className="mt-6 text-4xl font-extrabold leading-[1.05] tracking-tight md:text-6xl lg:text-7xl animate-hero-rise" style={{ animationDelay: "120ms" }}>
+            Venez développer vos <span className="text-accent">compétences,</span>
+            <br />
+            et forger votre <span className="underline decoration-accent decoration-4 underline-offset-[6px]">avenir</span>.
           </h1>
           <p className="mt-6 max-w-xl text-lg text-white/85 animate-hero-rise" style={{ animationDelay: "260ms" }}>
             {"\n"}
