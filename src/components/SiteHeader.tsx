@@ -32,7 +32,7 @@ export function SiteHeader() {
         <Link to="/" className="flex items-center gap-3">
           <img src={logo} alt="CFP Lumière" className="h-16 w-16 object-contain md:h-20 md:w-20" />
           <div className="leading-tight">
-            <div className="text-2xl font-black tracking-tight text-brand-blue-deep md:text-3xl lg:text-4xl">{SITE.name}</div>
+            <div className="text-3xl font-black tracking-tight text-brand-blue-deep md:text-3xl lg:text-4xl">{SITE.name}</div>
             <div className="text-[11px] uppercase tracking-widest text-muted-foreground md:text-xs">
               Lubumbashi
             </div>
